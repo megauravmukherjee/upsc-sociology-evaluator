@@ -172,7 +172,7 @@ with tab2:
             st.error("Please enter a valid Gemini API Key in the sidebar.")
         else:
             with st.spinner(f"Synthesizing {selected_subject} model answer..."):
-                ans_result = resolve_sociology_question(user_q, word_limit=word_limit, paper_type=paper_scope, api_key=api_key)
+                ans_result = resolve_sociology_question(user_q, word_limit=word_limit, paper_type=paper_scope, subject=selected_subject, api_key=api_key)
             
             st.markdown("---")
             st.subheader(f"✍️ Model Answer & Framework ({selected_subject})")
@@ -197,9 +197,9 @@ with tab3:
 
                 file_bytes = topper_file.read()
                 ocr_text, _ = process_pdf_or_image(file_bytes, topper_file.name, api_key=api_key, progress_callback=update_progress)
-                status.write("⏳ Extracting definitions, quotes, diagrams & templates...")
-                extracted_data = analyze_and_extract_topper_copy(ocr_text, api_key=api_key)
-                status.update(label="🎉 Successfully analyzed Topper Copy!", state="complete", expanded=False)
+                status.write(f"⏳ Extracting {selected_subject} definitions, quotes, diagrams & templates...")
+                extracted_data = analyze_and_extract_topper_copy(ocr_text, subject=selected_subject, api_key=api_key)
+                status.update(label=f"🎉 Successfully analyzed {selected_subject} Topper Copy!", state="complete", expanded=False)
             
             if "analysis_summary" in extracted_data:
                 st.info(f"**Topper Copy Strategy Summary**: {extracted_data['analysis_summary']}")

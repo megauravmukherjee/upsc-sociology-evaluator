@@ -3,9 +3,10 @@ import os
 from google import genai
 import config
 
-def resolve_sociology_question(user_question, word_limit=250, paper_type="Both", api_key=None):
+def resolve_upsc_question(user_question, word_limit=250, paper_type="Both", subject="Sociology Optional", api_key=None):
     """
-    Answers direct user conceptual doubts or UPSC PYQs in UPSC Mains standard format.
+    Answers direct user conceptual doubts or UPSC PYQs using Anudeep Durishetty AIR 1 subject frameworks.
+    Guarantees strict subject isolation without forcing Sociology thinkers into GS or Essay papers.
     """
     key = api_key or os.environ.get("GEMINI_API_KEY")
     if not key:
@@ -13,23 +14,25 @@ def resolve_sociology_question(user_question, word_limit=250, paper_type="Both",
     
     client = genai.Client(api_key=key)
 
+    subject_prompt = config.SUBJECT_QA_PROMPTS.get(subject, config.SUBJECT_QA_PROMPTS["Sociology Optional"])
+
     prompt = f"""
+    Target Subject: {subject}
     Target Question: "{user_question}"
     Target Word Limit: {word_limit} words
-    Target Syllabus Scope: {paper_type} (Paper 1 / Paper 2 / Inter-linked)
+    Target Paper Scope: {paper_type}
 
-    Please answer this Sociology optional question following the structured UPSC Mains format defined in your system prompt.
-    Ensure to include:
-    1. Model UPSC Answer ({word_limit} words)
-    2. Thinkers Matrix Table
-    3. Contemporary Indian Examples & Case Studies
-    4. Diagram/Flowchart Suggestion
-    5. Common Pitfalls to Avoid
+    Please generate a model answer / blueprint for this {subject} question strictly adhering to your subject prompt instructions and Anudeep Durishetty AIR 1 frameworks.
+    CRITICAL RULE: DO NOT include Sociology thinkers unless the subject is explicitly Sociology Optional!
     """
 
     response = client.models.generate_content(
         model=config.DEFAULT_MODEL,
-        contents=[config.SYSTEM_QA_PROMPT, prompt]
+        contents=[subject_prompt, prompt]
     )
 
     return response.text
+
+# Alias for backwards compatibility
+def resolve_sociology_question(user_question, word_limit=250, paper_type="Both", subject="Sociology Optional", api_key=None):
+    return resolve_upsc_question(user_question, word_limit=word_limit, paper_type=paper_type, subject=subject, api_key=api_key)
