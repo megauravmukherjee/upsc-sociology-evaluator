@@ -4,83 +4,246 @@
       "term": "Anomie",
       "author": "Emile Durkheim",
       "definition": "A condition of normlessness where social norms degrade or break down, leading to a lack of moral regulation in society.",
-      "reusable_context": "Useful for Sociology Paper 1 & GS 1 questions on social disorder, suicide, rapid industrialization, and modern crime."
+      "reusable_context": "Sociology Optional (Paper 1 & Paper 2)"
     },
     {
       "term": "Basic Structure Doctrine",
       "author": "Supreme Court of India (Kesavananda Bharati Case 1973)",
       "definition": "Judicial principle that certain fundamental features of the Constitution (Democracy, Federalism, Rule of Law, Judicial Review, Secularism) cannot be altered or destroyed through Parliamentary amendments under Article 368.",
-      "reusable_context": "Essential for GS 2 questions on Constitutional Amendments, Judicial Review, and Separation of Powers."
+      "reusable_context": "GS 2 Polity & Governance"
     },
     {
       "term": "Probity in Governance",
       "author": "2nd ARC / Philosophical Ethics",
       "definition": "Strict adherence to the highest standards of honesty, integrity, transparency, and ethical conduct in public administration.",
-      "reusable_context": "Core term for GS 4 Ethics questions on corruption, administrative integrity, and public service values."
+      "reusable_context": "GS 4 (Ethics)"
     },
     {
       "term": "Sendai Framework",
       "author": "UN Disaster Risk Reduction (2015-2030)",
       "definition": "Voluntary 15-year agreement prioritizing understanding disaster risk, strengthening risk governance, investing in resilience, and 'Building Back Better' in recovery.",
-      "reusable_context": "Crucial hook for GS 3 Disaster Management questions."
+      "reusable_context": "GS 3 Disaster Management"
+    },
+    {
+      "term": "Transnational Organised Crime (TOC)",
+      "author": "Standard International / Security Definition",
+      "definition": "Refers to crime networks and illicit operations extending beyond international borders.",
+      "reusable_context": "GS 2"
+    },
+    {
+      "term": "Digital Sequence Information (DSI)",
+      "author": "Convention on Biological Diversity (CBD)",
+      "definition": "Digital sequence information refers to digital data obtained from the genetic sequencing of components of biological diversity.",
+      "reusable_context": "GS 2"
+    },
+    {
+      "term": "Digital Agriculture Mission (DAM)",
+      "author": "Ministry of Agriculture",
+      "definition": "A national mission aiming to overhaul and mainstream ICT tools, big data, and e-technology across agricultural governance and operations.",
+      "reusable_context": "GS 2"
     }
   ],
   "thinker_quotes": [
     {
       "thinker": "Mahatma Gandhi",
       "quote": "The world has enough for everyone's need, but not for everyone's greed.",
-      "context": "Ideal quote for GS 3 Environment, GS 4 Ethics, and Essay papers on sustainability and consumerism."
+      "context": "GS 3 Environment, GS 4 Ethics, and Essay Evaluator (Sustainability & Materialism)"
     },
     {
       "thinker": "Dr. B.R. Ambedkar",
       "quote": "Constitutional morality is not a natural sentiment. It has to be cultivated. We must realize that our people have yet to learn it.",
-      "context": "High-impact opening quote for GS 2 Polity & Governance questions."
+      "context": "GS 2 Polity & Governance"
     },
     {
       "thinker": "Immanuel Kant",
       "quote": "In law a man is guilty when he violates the rights of others. In ethics he is guilty if he only thinks of doing so.",
-      "context": "Great opening quote for GS 4 Ethics theory questions."
+      "context": "GS 4 (Ethics)"
     },
     {
       "thinker": "Karl Marx",
       "quote": "The history of all hitherto existing society is the history of class struggles.",
-      "context": "Introductory hook for Sociology stratification or historical change questions."
+      "context": "Sociology Optional (Paper 1 Stratification)"
+    },
+    {
+      "thinker": "Nelson Mandela",
+      "quote": "Education is the most powerful weapon which you can use to change the world.",
+      "context": "Essay Evaluator (Education & Social Transformation)"
+    },
+    {
+      "thinker": "Rabindranath Tagore",
+      "quote": "Where the mind is without fear and the head is held high; Where knowledge is free...",
+      "context": "Essay Evaluator (Rhetorical Conclusion & Freedom of Thought)"
+    },
+    {
+      "thinker": "Amartya Sen",
+      "quote": "A country should be judged not by the efficiency of its richest, but by the well-being of its poorest.",
+      "context": "Essay Evaluator (Economic Development & Inclusive Growth)"
+    },
+    {
+      "thinker": "Yuval Noah Harari (Homo Deus)",
+      "quote": "Technology is not deterministic. It gives us options, but humans decide how to deploy that power.",
+      "context": "Essay Evaluator (Artificial Intelligence & Technological Ethics)"
+    },
+    {
+      "thinker": "Aeschylus",
+      "quote": "In war, truth is the first casualty.",
+      "context": "GS 2"
     }
   ],
   "intro_templates": [
     {
       "topic": "Cooperative Federalism (GS 2)",
-      "template": "Federalism in India is a constitutional compromise between central unity and regional autonomy. As the Supreme Court highlighted in the S.R. Bommai case, federalism is a basic feature of the Constitution, requiring 'Cooperative and Competitive Federalism' to address multi-dimensional governance challenges."
+      "template": "Federalism in India is a constitutional compromise between central unity and regional autonomy. As the Supreme Court highlighted in the S.R. Bommai case, federalism is a basic feature of the Constitution, requiring 'Cooperative and Competitive Federalism' to address multi-dimensional governance challenges.",
+      "subject": "GS 2"
     },
     {
       "topic": "Inclusive Growth (GS 3)",
-      "template": "Inclusive growth goes beyond aggregate GDP metrics to ensure equitable distribution of economic opportunities, poverty reduction, financial inclusion, and social empowerment, aligning with SDG 1 (No Poverty) and SDG 10 (Reduced Inequalities)."
+      "template": "Inclusive growth goes beyond aggregate GDP metrics to ensure equitable distribution of economic opportunities, poverty reduction, financial inclusion, and social empowerment, aligning with SDG 1 (No Poverty) and SDG 10 (Reduced Inequalities).",
+      "subject": "GS 3"
     },
     {
-      "topic": "Philosophical Essay",
-      "template": "Throughout human history, great intellectual leaps have originated not from static consensus, but from the courageous questioning of established dogmas. As Socrates posited, 'An unexamined life is not worth living'..."
+      "topic": "Information Warfare & Fake News",
+      "template": "The rise of information warfare and digital propaganda has elevated fake news into a key threat to national security and internal cohesion.",
+      "subject": "GS 2"
+    },
+    {
+      "topic": "Money Laundering & Terror Financing",
+      "template": "As per UNODC, money laundering accounts for 3-4% of global GDP, with emerging crypto-hawala networks compounding security risks across borders.",
+      "subject": "GS 2"
+    },
+    {
+      "topic": "Digital Governance & Inclusivity",
+      "template": "India has evolved into one of the largest digitized economies globally, driving inclusive governance through scalable digital public infrastructure.",
+      "subject": "GS 2"
     }
   ],
   "outro_templates": [
     {
       "topic": "Ethics & Civil Service (GS 4)",
-      "template": "Thus, fostering probity in governance requires a dual approach: institutional mechanisms (L Lokpal, Whistleblower Protection, E-governance) combined with internal moral grounding (Niti and Niyati) among public servants to fulfill the constitutional vision of a welfare state."
+      "template": "Thus, fostering probity in governance requires a dual approach: institutional mechanisms (Lokpal, Whistleblower Protection, E-governance) combined with internal moral grounding (Niti and Niyati) among public servants to fulfill the constitutional vision of a welfare state.",
+      "subject": "GS 4 (Ethics)"
     },
     {
       "topic": "Environmental Sustainability (GS 3)",
-      "template": "Moving forward, India's pathway must balance developmental aspirations with environmental stewardship by embedding climate resilience into infrastructure, fulfilling Panchamrit commitments, and embracing the LiFE (Lifestyle for Environment) global movement."
+      "template": "Moving forward, India's pathway must balance developmental aspirations with environmental stewardship by embedding climate resilience into infrastructure, fulfilling Panchamrit commitments, and embracing the LiFE (Lifestyle for Environment) global movement.",
+      "subject": "GS 3"
+    },
+    {
+      "topic": "Digital Inclusive Growth",
+      "template": "Digitisation can lead to sustainable and inclusive growth when coupled with the core philosophy of 'Sabka Saath, Sabka Vikas'.",
+      "subject": "GS 2"
+    },
+    {
+      "topic": "Internal Security & Threat Countermeasures",
+      "template": "A whole-of-government approach and zero-tolerance policy are essential to build a Surakshit, Sashakt, and Samriddh Bharat.",
+      "subject": "GS 2"
+    },
+    {
+      "topic": "Global Biodiversity & Benefit Sharing",
+      "template": "Robust regulation of sequence data ensures developmental justice while upholding the rights of indigenous local communities over traditional knowledge.",
+      "subject": "GS 2"
     }
   ],
   "diagrams": [
     {
       "title": "GS 4 Ethical Dilemma Resolution Framework",
       "description": "Flowchart showing: Input Dilemma -> Stakeholder Mapping -> Identification of Options -> Ethical Justification (Utilitarian vs Deontological vs Virtue Ethics) -> Final Action Plan.",
-      "reusable_context": "Draw for any GS 4 Ethics Case Study."
+      "reusable_context": "GS 4 (Ethics)"
     },
     {
       "title": "GS 2 Separation of Powers Triad",
       "description": "Triangle diagram showing Legislature (Law Making), Executive (Law Implementation), and Judiciary (Law Interpretation) with double-headed check-and-balance arrows.",
-      "reusable_context": "Draw for questions on Judicial Activism, Executive Orders, or Parliamentary Oversight."
+      "reusable_context": "GS 2"
+    },
+    {
+      "title": "Per Capita Water Availability Trend",
+      "description": "Bar plot / line trend illustrating steep decline in per capita water availability in India: 1950 (5171 m\u00b3), 2011 (1544 m\u00b3), and projected 2050 (1140 m\u00b3).",
+      "reusable_context": "GS 2"
+    },
+    {
+      "title": "India's Security Environment (Golden Crescent & Golden Triangle)",
+      "description": "Simplified map diagram of India flanked by Death/Golden Crescent (West) and Death/Golden Triangle (East), illustrating security threats: drug trafficking, gun running, and piracy.",
+      "reusable_context": "GS 2"
+    },
+    {
+      "title": "Crypto-Hawala Network Settlement Flow",
+      "description": "Flowchart showing traditional Hawala transfer between two points combined with cryptocurrency settlement layers to bypass formal banking oversight.",
+      "reusable_context": "GS 2"
+    },
+    {
+      "title": "Components of Land Records Modernisation (DILRMP)",
+      "description": "Tree diagram highlighting core pillars: Cadastral Maps, Land Record Registry, and Bhu-Aadhar integration.",
+      "reusable_context": "GS 2"
+    }
+  ],
+  "essay_hooks": [
+    {
+      "theme": "Cyberspace & Digital Warfare",
+      "hook_type": "Fictitious Story",
+      "hook_text": "It is a fine winter morning in 2025. As commuters travel to work, the metro rail crashes to a grinding halt. Concurrently, planes in the airspace lose communication with ground control. Banks report breach of confidential data. Government websites are hacked with threatening messages. Energy and nuclear power plant control systems are infected with strange viruses. Within an hour, critical infrastructure collapses as the country falls victim to a coordinated cyberattack\u2014cyberwar. This scary scenario, confined earlier to sci-fi movies, is now a potential reality of the 21st century...",
+      "subject": "Essay Evaluator"
+    },
+    {
+      "theme": "Be the Change / Moral Leadership",
+      "hook_type": "Historical Anecdote",
+      "hook_text": "It was 1893. A bright young lawyer was travelling first class on a train in South Africa. During the journey, a white man objected to his presence despite his valid ticket, insisting 'coloured' men were supposed to ride in third class. When the lawyer refused to give up his seat, he was thrown off the train at Pietermaritzburg. Insulted at this discrimination, the young man resolved to fight injustice with truth and non-violence. He went on to become the force of change he wished to see in the world: Mahatma Gandhi.",
+      "subject": "Essay Evaluator"
+    },
+    {
+      "theme": "Change is the End Result of All Learning",
+      "hook_type": "Real-Life Anecdote",
+      "hook_text": "In the 1980s, the Govt of Tamil Nadu faced a crisis: school dropout rates were unacceptably high. A detailed study revealed that ill-health and acute malnutrition were the primary causes. The state government decided to introduce a unique scheme\u2014the now popular mid-day meal scheme. Within a couple of years, education levels started rising and dropout ratios fell sharply. As Jean Dreze observes, the mid-day meal scheme remains the primary reason for Tamil Nadu's stellar primary education performance. This incident proves that change is the end result of all learning.",
+      "subject": "Essay Evaluator"
+    },
+    {
+      "theme": "Climate Change Emergency",
+      "hook_type": "Startling Statistic",
+      "hook_text": "Around 1 million plant and animal species are on the verge of extinction, with alarming implications for human survival, according to a United Nations report. Our natural resources are getting depleted, rains are getting erratic, and the air is turning toxic. The scientific consensus is clear: carbon emissions from human activities are irrevocably damaging the environment at a rapid pace. It is not climate change anymore\u2014it is a climate emergency.",
+      "subject": "Essay Evaluator"
+    }
+  ],
+  "essay_structures": [
+    {
+      "topic": "Can Capitalism Bring Inclusive Growth?",
+      "framework": "Debating For and Against + Sectoral PESTLE",
+      "subheadings": [
+        "CAPITALISM: A RISING TIDE THAT LIFTS ALL BOATS",
+        "CAPITALISM: OF THE RICH, BY THE RICH, FOR THE RICH",
+        "INCLUSIVE CAPITALISM: TOWARDS EQUITY & PUBLIC WELFARE"
+      ],
+      "subject": "Essay Evaluator"
+    },
+    {
+      "topic": "Globalisation: A Curse or a Blessing?",
+      "framework": "Temporal (Past, Present, Future) + Walks of Life",
+      "subheadings": [
+        "GLOBALISATION: HISTORICAL EVOLUTION & PROMISE",
+        "UNCHECKED MARKETS & SOCIETAL FRACTURES",
+        "HUMAN-CENTRIC GLOBALISATION FOR THE 21ST CENTURY"
+      ],
+      "subject": "Essay Evaluator"
+    }
+  ],
+  "essay_rhetorical_conclusions": [
+    {
+      "type": "Poem / Shloka (Tagore Gitanjali)",
+      "ending_text": "As Rabindranath Tagore eloquently wrote in Gitanjali:\n'Where the mind is without fear and the head is held high;\nWhere knowledge is free;\nWhere the mind is led forward by thee into ever-widening thought and action;\nInto that heaven of freedom, my Father, let my country awake.'",
+      "subject": "Essay Evaluator"
+    },
+    {
+      "type": "Gandhiji's Talisman",
+      "ending_text": "Going by Gandhiji's Talisman, the ultimate measure to determine whether our economic and technological endeavours are successful is not to see how far we launch rockets or how tall we build skyscrapers. The ultimate test is to check whether it restores control over destiny to the poorest of the poor.",
+      "subject": "Essay Evaluator"
+    },
+    {
+      "type": "Echo Effect (Character Recall)",
+      "ending_text": "Recalling the opening story of farmer Narayana: 'Technology and policy reforms must ultimately converge to light up the life of Narayana. When every citizen gains food for the mouth, work for the hand, and a spark of joy in their eyes, India will truly realize its vision.'",
+      "subject": "Essay Evaluator"
+    },
+    {
+      "type": "Constitutional Vision",
+      "ending_text": "Achieving a 5 trillion economy is challenging, yet possible. But we must ask ourselves\u2014to what end? A superpower status must be about making a positive difference to every citizen of the republic, realizing the Preamble's sacred promise of securing justice, liberty, equality, and fraternity for all.",
+      "subject": "Essay Evaluator"
     }
   ]
 }

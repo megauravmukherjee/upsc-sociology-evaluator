@@ -1,6 +1,7 @@
 import json
 import os
 from google import genai
+from google.genai import types
 import config
 
 def load_vault():
@@ -25,60 +26,99 @@ def evaluate_answer_script(answer_text, question_context="", max_marks=15, subje
     client = genai.Client(api_key=key)
     vault = load_vault()
     
-    # Filter vault items by subject to prevent ANY cross-contamination
+    # Filter vault items STRICTLY by subject to prevent ANY cross-contamination
     vault_summary = ""
     if vault:
         if subject == "Sociology Optional":
-            defs = [d.get("term") + " (" + d.get("author", "") + ")" for d in vault.get("definitions", []) if "Sociology" in d.get("reusable_context", "Sociology")][:4]
-            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if q.get("thinker") in ["Karl Marx", "Emile Durkheim", "M.N. Srinivas"]][:3]
+            defs = [d.get("term") + " (" + str(d.get("author", "")) + ")" for d in vault.get("definitions", []) if "Sociology" in d.get("reusable_context", "")][:4]
+            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "Sociology" in q.get("context", "") or q.get("thinker") in ["Karl Marx", "Emile Durkheim", "M.N. Srinivas", "Max Weber"]][:4]
+            vault_summary = f"\nRelevant {subject} Vault Benchmark Context:\n- Sociological Definitions: {', '.join(defs)}\n- Thinker Quotes: {'; '.join(quotes)}"
+        
+        elif subject == "GS 1":
+            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 1" in d.get("reusable_context", "") or "GS1" in d.get("reusable_context", "")][:4]
+            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "GS 1" in q.get("context", "")][:3]
+            vault_summary = f"\nRelevant {subject} Vault Benchmark Context:\n- Key Concepts/Locations: {', '.join(defs)}\n- Quotes/References: {'; '.join(quotes)}"
+        
         elif subject == "GS 2":
-            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 2" in d.get("reusable_context", "GS 2")][:4]
-            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "GS 2" in q.get("context", "")][:3]
+            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 2" in d.get("reusable_context", "") or "Polity" in d.get("reusable_context", "")][:4]
+            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "GS 2" in q.get("context", "") or "Polity" in q.get("context", "")][:4]
+            vault_summary = f"\nRelevant {subject} Vault Benchmark Context:\n- Articles & Precedents: {', '.join(defs)}\n- Key Quotes: {'; '.join(quotes)}"
+        
         elif subject == "GS 3":
-            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 3" in d.get("reusable_context", "GS 3")][:4]
+            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 3" in d.get("reusable_context", "") or "Economy" in d.get("reusable_context", "")][:4]
             quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "GS 3" in q.get("context", "")][:3]
+            vault_summary = f"\nRelevant {subject} Vault Benchmark Context:\n- Sector Stats & Frameworks: {', '.join(defs)}\n- Key Quotes: {'; '.join(quotes)}"
+        
         elif subject == "GS 4 (Ethics)":
-            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 4" in d.get("reusable_context", "GS 4")][:4]
-            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "GS 4" in q.get("context", "")][:3]
+            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "GS 4" in d.get("reusable_context", "") or "Ethics" in d.get("reusable_context", "")][:4]
+            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "GS 4" in q.get("context", "") or "Ethics" in q.get("context", "")][:4]
+            vault_summary = f"\nRelevant {subject} Vault Benchmark Context:\n- Ethics Values & Definitions: {', '.join(defs)}\n- Moral Thinker & Leader Quotes: {'; '.join(quotes)}"
+        
         elif subject == "Essay Evaluator":
-            defs = [d.get("term") + ": " + d.get("definition") for d in vault.get("definitions", []) if "Essay" in d.get("reusable_context", "Essay")][:3]
-            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if q.get("thinker") in ["Mahatma Gandhi", "Immanuel Kant"]][:3]
-        else:
-            defs = []
-            quotes = []
-
-        if defs or quotes:
-            vault_summary = f"""
-            Relevant {subject} Vault Benchmark Context:
-            - Key Definitions/Articles/Terms: {', '.join(defs)}
-            - Benchmark Quotes/Precedents: {'; '.join(quotes)}
-            """
+            hooks = [h.get("theme", "") + " Hook: " + h.get("hook_text", "") for h in vault.get("essay_hooks", [])][:3]
+            quotes = [q.get("thinker") + ": '" + q.get("quote") + "'" for q in vault.get("thinker_quotes", []) if "Essay" in q.get("context", "") or q.get("subject") == "Essay Evaluator"][:4]
+            rhetoricals = [r.get("type", "") + ": " + r.get("ending_text", "") for r in vault.get("essay_rhetorical_conclusions", [])][:2]
+            
+            vault_summary = f"\nBenchmark Essay Topper Vault Context (Anudeep Durishetty AIR 1 Standards):\n"
+            if hooks:
+                vault_summary += f"- Topper Intro Hooks: {'; '.join(hooks)}\n"
+            if quotes:
+                vault_summary += f"- Topper Essay Quotes: {'; '.join(quotes)}\n"
+            if rhetoricals:
+                vault_summary += f"- Topper Rhetorical Endings: {'; '.join(rhetoricals)}\n"
 
     subject_prompt = config.SUBJECT_PROMPTS.get(subject, config.SUBJECT_PROMPTS["Sociology Optional"])
-    system_prompt = f"{config.SYSTEM_EVALUATOR_PROMPT_BASE}\n\n{subject_prompt}"
+    system_prompt = f"{config.SYSTEM_EVALUATOR_PROMPT_BASE}\n\n{subject_prompt}\n\n{vault_summary}"
 
     prompt = f"""
     Evaluate the following UPSC CSE Mains Answer Script.
     TARGET SUBJECT: {subject}
-    CRITICAL MANDATE: Evaluate ONLY through the lens of {subject}. DO NOT mention or demand Sociology optional thinkers unless the subject is explicitly Sociology Optional!
+    
+    CRITICAL SUBJECT ISOLATION RULE:
+    You are evaluating a {subject} script. You MUST NOT demand, mention, or suggest Sociology optional thinkers (such as Marx, Durkheim, Weber, Srinivas, Ghurye, Parsons, Merton, Mead, Beteille) UNLESS the target subject is explicitly 'Sociology Optional'. Evaluate strictly and exclusively through the lens of {subject}!
 
     --- QUESTION CONTEXT ---
     {question_context if question_context else 'Question inferred from candidate script below.'}
     
     Maximum Marks for Question: {max_marks} Marks
 
-    {vault_summary}
-
     --- CANDIDATE ANSWER SCRIPT (OCR Extracted) ---
     {answer_text}
 
     Please provide a detailed, rigorous evaluation strictly following your subject prompt guidelines and Anudeep Durishetty AIR 1 frameworks.
-    Include dimension scores, total marks out of {max_marks}, critical gaps, missing articles/facts/thinkers appropriate ONLY for {subject}, and a model approach.
+    For Essay Evaluator: Assess 120-150 word Intro Hook (penalize GS dictionary intros!), PESTLE/Temporal Body, Paragraph Flow with Connectives, ALL-CAPS Subheadings, Simple Jargon-Free Language, and 2-Segment Conclusion (Summary + 30-50 word Rhetorical Ending).
+    Include dimension scores, total marks out of {max_marks}, critical gaps, missing elements appropriate ONLY for {subject}, and a model approach.
     """
 
-    response = client.models.generate_content(
-        model=config.DEFAULT_MODEL,
-        contents=[system_prompt, prompt]
-    )
+    eval_model = getattr(config, "EVAL_MODEL", config.DEFAULT_MODEL)
+    
+    # 3. Context Caching: Cuts input prompt cost by up to 75-90% for repeated evaluations
+    cached_name = None
+    if getattr(config, "ENABLE_CONTEXT_CACHING", False):
+        try:
+            cache = client.caches.create(
+                model=eval_model,
+                config=types.CreateCachedContentConfig(
+                    contents=[system_prompt],
+                    ttl="300s"
+                )
+            )
+            cached_name = cache.name
+        except Exception:
+            cached_name = None
+
+    if cached_name:
+        response = client.models.generate_content(
+            model=eval_model,
+            contents=[prompt],
+            config=types.GenerateContentConfig(cached_content=cached_name)
+        )
+    else:
+        response = client.models.generate_content(
+            model=eval_model,
+            contents=[system_prompt, prompt]
+        )
 
     return response.text
+
+
