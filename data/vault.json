@@ -1,0 +1,163 @@
+{
+  "definitions": [
+    {
+      "term": "Anomie",
+      "author": "Emile Durkheim",
+      "definition": "A condition of normlessness where social norms degrade or break down, leading to a lack of moral regulation in society.",
+      "reusable_context": "Useful for questions on social disorder, suicide, rapid industrialization, and modern crime."
+    },
+    {
+      "term": "Alienation",
+      "author": "Karl Marx",
+      "definition": "The estrangement of workers from the products of their labour, the act of production, their human potential (species-being), and fellow human beings under capitalism.",
+      "reusable_context": "Ideal for questions on industrial work, modern bureaucracy, consumerism, and capitalist production."
+    },
+    {
+      "term": "Sanskritization",
+      "author": "M.N. Srinivas",
+      "definition": "The process by which a low Hindu caste or tribe changes its customs, ritual, ideology, and way of life in the direction of a high, frequently twice-born (Dwija) caste.",
+      "reusable_context": "Essential for Paper 2 questions on social mobility, caste transformation, and cultural change."
+    },
+    {
+      "term": "Ideal Type",
+      "author": "Max Weber",
+      "definition": "A conceptual tool or analytical construct formed by the accentuation of one or more points of view to compare and understand real-world social phenomena.",
+      "reusable_context": "Great introduction for questions on bureaucracy, authority, protestant ethic, or methodology."
+    },
+    {
+      "term": "Gig Economy",
+      "author": "Guy Standing / Keith Hart",
+      "definition": "Informal employment model characterized by flexible post-fordist arrangements where workers operate as independent contractors, lacking tenure, social security, and standard employment contract protections.",
+      "reusable_context": "Work and Economic Life, Post-Fordism, Precariat, Labor Rights."
+    },
+    {
+      "term": "Fictive Kinship",
+      "author": "Cheshire Calhoun / Edward Westermarck",
+      "definition": "Extended social network based neither on biological descent nor marital alliance, providing mutual support, solidarity, and social connectedness (e.g., LGBTQIA+ 'chosen families', professional alumni groups).",
+      "reusable_context": "Systems of Kinship, Family diversity, Post-modern relationships."
+    },
+    {
+      "term": "Performativity of Gender",
+      "author": "Judith Butler",
+      "definition": "The conceptualization that gender identity is not a natural biological fact, but a socially constructed and repeatedly performed set of normative roles enforced by institutional structures.",
+      "reusable_context": "Gender studies, Stratification, Patriarchy, Family & Household."
+    },
+    {
+      "term": "The Second Shift",
+      "author": "Arlie Hochschild",
+      "definition": "The ongoing phenomenon where working women perform an additional 30\u201370% more unpaid household labor and caregiving compared to their male counterparts after completing their paid work shift.",
+      "reusable_context": "Gender Inequality, Unpaid care work, Patriarchy, Industrialization."
+    },
+    {
+      "term": "Risk Society",
+      "author": "Ulrich Beck",
+      "definition": "A stage of modernity where society is increasingly overrun by manufactured, systemic, and unmitigated risks (climate change, cyber warfare, family breakdown) produced by modern institutions that no longer control their long-term consequences.",
+      "reusable_context": "Social Change, Environment, Modernity, Global Risks."
+    },
+    {
+      "term": "Rationalization & Disenchantment",
+      "author": "Max Weber",
+      "definition": "Rationalization is the structural transition prioritizing efficiency, logic, and affective neutrality across social life; Disenchantment is the accompanying loss of magic, myth, and religious authority as primary explanatory frameworks.",
+      "reusable_context": "Modernity, Bureaucracy, Secularization, Sociology of Religion."
+    }
+  ],
+  "thinker_quotes": [
+    {
+      "thinker": "Karl Marx",
+      "quote": "The history of all hitherto existing society is the history of class struggles.",
+      "context": "Introductory or concluding hook for questions on social stratification, historical materialism, or social change."
+    },
+    {
+      "thinker": "Emile Durkheim",
+      "quote": "Society is not a mere sum of individuals, but the system formed by their association represents a specific reality.",
+      "context": "Perfect for establishing the reality of Social Facts and anti-reductionist methodology."
+    },
+    {
+      "thinker": "M.N. Srinivas",
+      "quote": "Caste is so tacitly accepted as the natural order of things that the caste instinct manifests itself in unexpected places.",
+      "context": "Useful hook for discussions on caste dynamics in modern Indian politics and elections."
+    },
+    {
+      "thinker": "Anthony Giddens",
+      "quote": "Common sense is relevant to but not determinative of sociology.",
+      "context": "Sociology vs Common Sense debates."
+    },
+    {
+      "thinker": "Simone de Beauvoir / Judith Butler",
+      "quote": "One is not born a woman, but becomes one.",
+      "context": "Feminist critiques of gender, family roles, and naturalized kinship division of labor."
+    },
+    {
+      "thinker": "Yogendra Singh",
+      "quote": "Social change involves both the modernization of tradition and the traditionalization of modernity.",
+      "context": "Cultural change, impact of information technology, and resilience of traditional institutions like endogamous marriage."
+    },
+    {
+      "thinker": "George Ritzer",
+      "quote": "McDonaldization of society.",
+      "context": "Critique of extreme rationalization, standardization, and the loss of the human element in modern organizations."
+    }
+  ],
+  "intro_templates": [
+    {
+      "topic": "Social Stratification",
+      "template": "Social stratification refers to a society's categorization of its people into rankings based on factors like wealth, income, education, family background, and power. While structural-functionalists (Parsons, Davis & Moore) view it as an integrative mechanism ensuring role allocation, Marxists and Weberians critique it as an institutionalized system of inequality and power concentration."
+    },
+    {
+      "topic": "Caste System in India",
+      "template": "The caste system in India represents a unique blend of ritual hierarchy (Varna/Jati) and secular power dynamics. While Indologists like G.S. Ghurye emphasized scriptural roots and ritual purity, field-view sociologists like M.N. Srinivas and Andre Beteille highlighted its fluid, changing reality through Sanskritization, dominant caste dynamics, and democratic mobilization."
+    },
+    {
+      "topic": "Positivism vs Interpretivism",
+      "template": "The Positivist school champions the use of scientific methods to study observable social facts as external things (Durkheim, Comte). In contrast, Interpretivists advocate studying subjective social phenomena, emphasizing the meanings and motives individuals attribute to social action (Weber)."
+    },
+    {
+      "topic": "Gender and Kinship",
+      "template": "Feminist sociologists challenge traditional functionalist views of kinship by arguing that domestic roles restrict women's autonomy and arise out of social construction rather than biological imperative, mirroring Butler's concept of gender performativity."
+    },
+    {
+      "topic": "Risk Society & Modernity",
+      "template": "Ulrich Beck theorizes the 'risk society' as a contemporary state overrun by manufactured risks\u2014such as global warming, cyber warfare, and institution breakdown\u2014initiated by scientific and political processes that no longer maintain full control over their outcomes."
+    }
+  ],
+  "outro_templates": [
+    {
+      "topic": "Social Change & Modernization",
+      "template": "Thus, social change in modern society is neither purely linear nor uni-directional. As Yogendra Singh highlights, modernization in India involves a 'tradition-modernity continuum' where traditional structures adapt to modern democratic, economic, and technological impulses rather than simply disappearing."
+    },
+    {
+      "topic": "Information Revolution & Tradition",
+      "template": "As Yogendra Singh observed, modernizing influences lead dialectically to both the modernization of tradition and the traditionalization of modernity, demonstrating that cultural factors and technological change exist in a constant reciprocal relationship."
+    },
+    {
+      "topic": "Methodological Triangulation",
+      "template": "While empirical and scientific methods provide high reliability and macro-level scope, sociologists must triangulate them with interpretivist techniques to capture rich subjective experiences and achieve deep validity."
+    },
+    {
+      "topic": "Enduring Value of Family/Marriage",
+      "template": "Despite functional specialization and alternative institutional options, as Beck and Beck-Gernsheim conclude, the primary salience of marriage and family endures in the need for primary socialization and adult emotional stabilization."
+    }
+  ],
+  "diagrams": [
+    {
+      "title": "Parsons' AGIL Scheme",
+      "description": "4-quadrant box showing Adaptation (Economy), Goal Attainment (Polity), Integration (Culture/Law), and Latency (Family/Education).",
+      "reusable_context": "Draw for any question on social system equilibrium or functional prerequisites."
+    },
+    {
+      "title": "Merton's Strain Theory Matrix",
+      "description": "5x2 Matrix of Modes of Adaptation (Conformity, Innovation, Ritualism, Retreatism, Rebellion) against Cultural Goals (+/-) and Institutional Means (+/-).",
+      "reusable_context": "Draw for questions on deviance, crime, or structural bottlenecks in achieving aspirational goals."
+    },
+    {
+      "title": "A.G. Frank's Dependency Core-Periphery Model",
+      "description": "Two connected boxes representing 'Core (W. Europe, US)' and 'Periphery (Asia, Africa)'. Arrow from Periphery to Core shows flow of 'Raw materials', while arrow from Core to Periphery shows flow of 'Finished goods'.",
+      "reusable_context": "Dependency theory, global economic inequality, neocolonial exploitation, critique of Rostow's modernization model."
+    },
+    {
+      "title": "Wallerstein's World Systems Typology",
+      "description": "Concentric circles featuring an innermost core labeled 'Core', middle ring labeled 'Semi-periphery', and outer ring labeled 'Periphery'.",
+      "reusable_context": "Global stratification, capitalist world economy, structural underdevelopment."
+    }
+  ]
+}

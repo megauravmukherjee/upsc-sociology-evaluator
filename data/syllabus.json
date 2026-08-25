@@ -1,0 +1,88 @@
+{
+  "paper_1": {
+    "title": "Fundamentals of Sociology",
+    "topics": [
+      {
+        "unit": 1,
+        "name": "Sociology - The Discipline",
+        "keywords": ["Modernity and social changes in Europe", "Scope of the subject", "Comparison with other social sciences", "Sociology and common sense"]
+      },
+      {
+        "unit": 2,
+        "name": "Sociology as Science",
+        "keywords": ["Science, scientific method and critique", "Positivism and its critique", "Fact value and objectivity", "Non-positivist methodologies"]
+      },
+      {
+        "unit": 3,
+        "name": "Research Methods and Analysis",
+        "keywords": ["Qualitative and quantitative methods", "Techniques of data collection", "Variables, sampling, hypothesis, reliability and validity"]
+      },
+      {
+        "unit": 4,
+        "name": "Sociological Thinkers",
+        "thinkers": [
+          {"name": "Karl Marx", "concepts": ["Historical materialism", "Mode of production", "Alienation", "Class struggle"]},
+          {"name": "Emile Durkheim", "concepts": ["Division of labour", "Social fact", "Suicide", "Religion and society"]},
+          {"name": "Max Weber", "concepts": ["Social action", "Ideal types", "Authority and bureaucracy", "Protestant ethic and the spirit of capitalism"]},
+          {"name": "Talcott Parsons", "concepts": ["Social system", "Pattern variables", "AGIL paradigm"]},
+          {"name": "Robert K. Merton", "concepts": ["Latent and manifest functions", "Conformity and deviance", "Reference groups"]},
+          {"name": "Mead", "concepts": ["Self and identity", "Symbolic interactionism"]}
+        ]
+      },
+      {
+        "unit": 5,
+        "name": "Stratification and Mobility",
+        "keywords": ["Concepts - equality, inequality, hierarchy, exclusion", "Theories - Structural functionalist, Marxist, Weberian", "Dimensions - Class, status, gender, ethnicity", "Social mobility"]
+      },
+      {
+        "unit": 6,
+        "name": "Works and Economic Life",
+        "keywords": ["Social organization of work in different societies", "Formal and informal organization of work", "Labour and society"]
+      },
+      {
+        "unit": 7,
+        "name": "Politics and Society",
+        "keywords": ["Sociological theories of power", "Power elite, bureaucracy, pressure groups, political parties", "Nation, state, citizenship, democracy", "Social movements, revolution"]
+      },
+      {
+        "unit": 8,
+        "name": "Religion and Society",
+        "keywords": ["Sociological theories of religion", "Types of religious practices", "Religion in modern society - secularization, fundamentalism, religious revivalism"]
+      },
+      {
+        "unit": 9,
+        "name": "Systems of Kinship",
+        "keywords": ["Family, household, marriage", "Types and forms of family", "Lineage and descent", "Patriarchy and sexual division of labour"]
+      },
+      {
+        "unit": 10,
+        "name": "Social Change in Modern Society",
+        "keywords": ["Sociological theories of social change", "Development and dependency", "Agents of social change", "Education and social change"]
+      }
+    ]
+  },
+  "paper_2": {
+    "title": "Indian Society: Structure and Change",
+    "topics": [
+      {
+        "section": "A",
+        "name": "Introducing Indian Society",
+        "thinkers": [
+          {"name": "G.S. Ghurye", "approach": "Indology, Caste and Race"},
+          {"name": "M.N. Srinivas", "approach": "Structural-Functionalism, Dominant Caste, Sanskritization"},
+          {"name": "A.R. Desai", "approach": "Marxist perspective, Nationalism and Agrarian structure"}
+        ]
+      },
+      {
+        "section": "B",
+        "name": "Social Structure",
+        "keywords": ["Caste system - Perspective of Ghurye, Srinivas, Dumont, Ambedkar", "Agrarian class structure", "Industrial class structure", "Middle class in India", "Kinship systems in India", "Religion and society in India"]
+      },
+      {
+        "section": "C",
+        "name": "Social Changes in India",
+        "keywords": ["Visions of social change - Constitution, Planning, Development", "Rural and agrarian transformation", "Industrialization and urbanization", "Politics and society in India", "Social movements in modern India - Backward classes, Dalit, Women, Environmental", "Population dynamics", "Challenges of social transformation"]
+      }
+    ]
+  }
+}
