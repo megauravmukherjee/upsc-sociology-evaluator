@@ -10,18 +10,24 @@ from core.qa_resolver import resolve_sociology_question
 from core.topper_analyzer import analyze_and_extract_topper_copy
 
 st.set_page_config(
-    page_title="Sociology Expert - Evaluation Deep-Dive",
+    page_title="Module 1: Evaluation Deep-Dive - Sociology Expert",
     page_icon="🎓",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# Load Fonts, Material Symbols, and Custom Dark Obsidian Glassmorphism Styling from User's Stitch Spec
+# Custom Styling to match the Google Stitch Screenshot 100%
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
 <style>
-    /* Dark Obsidian Theme Global Rules */
+    /* Hide Default Streamlit Chrome for Clean App Experience */
+    header[data-testid="stHeader"] { display: none !important; }
+    footer { display: none !important; }
+    #MainMenu { visibility: hidden; }
+    
+    /* Reset & Geist Font */
     html, body, [class*="st-"] {
         font-family: 'Geist', sans-serif !important;
         background-color: #09090b !important;
@@ -32,64 +38,31 @@ st.markdown("""
         background-color: #09090b !important;
     }
     
-    /* Glass Panel Styling */
+    .block-container {
+        padding: 1.5rem 2rem 2rem 2rem !important;
+        max-width: 1600px !important;
+    }
+    
+    /* Sidebar Styling */
+    div[data-testid="stSidebar"] {
+        background-color: #0c0c0f !important;
+        border-right: 1px solid #18181b !important;
+        width: 260px !important;
+    }
+    
+    /* Glass Panel Cards */
     .glass-panel {
-        background: rgba(18, 18, 21, 0.75) !important;
+        background: rgba(18, 18, 21, 0.7) !important;
         backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
         border: 1px solid #27272a !important;
         border-radius: 12px;
         padding: 20px;
-        margin-bottom: 16px;
-    }
-    
-    .text-glow {
-        text-shadow: 0 0 12px rgba(167, 139, 250, 0.4);
-    }
-    
-    /* Header Banner */
-    .hero-banner {
-        background: linear-gradient(135deg, #09090b 0%, #121215 50%, #1e1e22 100%);
-        border: 1px solid #27272a;
-        border-radius: 16px;
-        padding: 28px 32px;
-        margin-bottom: 24px;
-        position: relative;
-    }
-    
-    .hero-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: #a78bfa;
-        letter-spacing: -0.02em;
-        margin: 0 0 8px 0;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-    
-    .hero-sub {
-        color: #a1a1aa;
-        font-size: 1.05rem;
-        margin-bottom: 16px;
-    }
-    
-    .badge-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(124, 58, 237, 0.15);
-        border: 1px solid rgba(167, 139, 250, 0.3);
-        color: #c4b5fd;
-        padding: 4px 14px;
-        border-radius: 9999px;
-        font-size: 0.82rem;
-        font-weight: 600;
     }
     
     /* Metric Cards */
-    .metric-box {
-        background: rgba(24, 24, 27, 0.8);
+    .metric-card {
+        background: #121215;
         border: 1px solid #27272a;
         border-radius: 12px;
         padding: 16px;
@@ -97,84 +70,80 @@ st.markdown("""
         flex-direction: column;
     }
     
-    .metric-label {
-        font-size: 0.85rem;
-        color: #a1a1aa;
-        margin-bottom: 4px;
-    }
-    
-    .metric-value-primary {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #a78bfa;
-    }
-    
-    .metric-value-tertiary {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #34d399;
-    }
-    
-    /* Tabs Styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background-color: #121215;
-        padding: 6px;
-        border-radius: 12px;
+    /* Thinker Mapping Cards */
+    .thinker-card {
+        background: #121215;
         border: 1px solid #27272a;
-    }
-    .stTabs [data-baseweb="tab"] {
-        height: 44px;
-        border-radius: 8px;
-        padding: 8px 18px;
-        font-weight: 600;
-        color: #a1a1aa;
-        border: none !important;
-        background: transparent;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #18181b !important;
-        color: #a78bfa !important;
-        border: 1px solid #7c3aed !important;
-        box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
+        border-radius: 10px;
+        padding: 14px;
     }
     
-    /* Input & Sidebar Overrides */
-    div[data-testid="stSidebar"] {
-        background-color: #0c0c0f !important;
-        border-right: 1px solid #27272a !important;
-    }
-    
+    /* Custom Input Fields */
     .stTextInput input, .stTextArea textarea, .stSelectbox select {
         background-color: #121215 !important;
         color: #fafafa !important;
         border: 1px solid #27272a !important;
-        border-radius: 8px !alignment;
+        border-radius: 8px !important;
     }
     
     .stButton button {
-        border-radius: 8px;
-        font-weight: 600;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
     }
     
-    .block-container {
-        padding-top: 1.8rem;
+    /* Material Symbol Styling */
+    .ms {
+        font-family: 'Material Symbols Outlined' !important;
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar Configuration - Sociology Expert Navigation
+# Sidebar - Matching Stitch Screenshot Nav
 st.sidebar.markdown("""
-<div style="margin-bottom: 20px;">
-    <div style="font-size: 1.4rem; font-weight: 700; color: #a78bfa; class='text-glow';">Sociology Expert</div>
-    <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px; background: #121215; padding: 10px; border-radius: 10px; border: 1px solid #27272a;">
-        <div style="width: 36px; height: 36px; border-radius: 50%; background: #18181b; border: 1px solid #3f3f46; display: flex; align-items: center; justify-content: center;">
-            <span class="material-symbols-outlined" style="color: #a1a1aa; font-size: 20px;">person</span>
+<div style="padding: 10px 0 20px 0;">
+    <div style="font-size: 1.35rem; font-weight: 700; color: #a78bfa; letter-spacing: -0.02em;">Sociology Expert</div>
+    
+    <div style="display: flex; items-center; gap: 12px; margin-top: 16px; padding: 10px; background: #121215; border: 1px solid #27272a; border-radius: 10px;">
+        <div style="width: 38px; height: 38px; border-radius: 50%; background: #18181b; border: 1px solid #3f3f46; display: flex; align-items: center; justify-content: center; shrink-0;">
+            <span class="ms" style="color: #a1a1aa; font-size: 20px;">person</span>
         </div>
-        <div>
-            <div style="font-size: 0.9rem; font-weight: 600; color: #fafafa;">IAS Aspirant</div>
-            <div style="font-size: 0.75rem; color: #a1a1aa;">Mains 2024 / Optional</div>
+        <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 0.88rem; font-weight: 600; color: #fafafa;">IAS Aspirant</span>
+            <span style="font-size: 0.75rem; color: #a1a1aa;">Mains 2024</span>
         </div>
+    </div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #a1a1aa; border-radius: 8px;">
+        <span class="ms" style="font-size: 20px;">dashboard</span>
+        <span style="font-size: 0.9rem; font-weight: 500;">Home</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #a1a1aa; border-radius: 8px;">
+        <span class="ms" style="font-size: 20px;">quiz</span>
+        <span style="font-size: 0.9rem; font-weight: 500;">Doubt Tracker</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #a1a1aa; border-radius: 8px;">
+        <span class="ms" style="font-size: 20px;">menu_book</span>
+        <span style="font-size: 0.9rem; font-weight: 500;">Sociology Hub</span>
+    </div>
+    <!-- Active Item -->
+    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #c4b5fd; background: #1e1e22; border-radius: 8px; font-weight: 700; border-left: 3px solid #7c3aed;">
+        <span class="ms" style="font-size: 20px; color: #c4b5fd;">fact_check</span>
+        <span style="font-size: 0.9rem;">Evaluation Deep-Dive</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #a1a1aa; border-radius: 8px;">
+        <span class="ms" style="font-size: 20px;">settings</span>
+        <span style="font-size: 0.9rem; font-weight: 500;">Settings</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -182,92 +151,59 @@ st.sidebar.markdown("""
 api_key = st.sidebar.text_input("Gemini API Key", type="password", value=os.environ.get("GEMINI_API_KEY", ""))
 
 if not api_key:
-    st.sidebar.warning("⚠️ Enter Gemini API key to run evaluation.")
+    st.sidebar.warning("⚠️ Enter Gemini API key to run OCR & evaluation.")
 else:
     st.sidebar.success("✅ Gemini API Key Active")
 
 st.sidebar.divider()
 
-# Load Vault Data for sidebar stats
-vault_data = load_vault()
-st.sidebar.markdown("### 📚 Sociology Vault Stats")
-col_s1, col_s2 = st.sidebar.columns(2)
-col_s1.metric("Definitions", len(vault_data.get("definitions", [])))
-col_s2.metric("Thinker Quotes", len(vault_data.get("thinker_quotes", [])))
+# Upgrade Button on Sidebar
+st.sidebar.markdown("""
+<div style="margin-top: 20px;">
+    <button style="width: 100%; padding: 10px; background: rgba(124, 58, 237, 0.12); border: 1px solid rgba(167, 139, 250, 0.4); color: #c4b5fd; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;">
+        Upgrade to Premium
+    </button>
+</div>
+""", unsafe_allow_html=True)
 
-col_s3, col_s4 = st.sidebar.columns(2)
-col_s3.metric("Intro Templates", len(vault_data.get("intro_templates", [])))
-col_s4.metric("Diagram Schematics", len(vault_data.get("diagrams", [])))
-
-st.sidebar.divider()
-
-# Syllabus Reference Expander
-with st.sidebar.expander("📖 Syllabus Quick Reference"):
-    syllabus_path = os.path.join(os.path.dirname(__file__), "data", "syllabus.json")
-    if os.path.exists(syllabus_path):
-        with open(syllabus_path, "r", encoding="utf-8") as f:
-            syl = json.load(f)
-            st.markdown("#### Paper 1: Key Thinkers")
-            for t in syl.get("paper_1", {}).get("topics", [])[3].get("thinkers", []):
-                st.write(f"- **{t['name']}**: {', '.join(t['concepts'])}")
-            st.markdown("#### Paper 2: Key Perspectives")
-            for t in syl.get("paper_2", {}).get("topics", [])[0].get("thinkers", []):
-                st.write(f"- **{t['name']}**: {t['approach']}")
-
-# Main Header Banner (Stitch Obsidian Theme)
+# Main Canvas Header
 st.markdown("""
-<div class="hero-banner">
-    <div class="hero-title">
-        <span class="material-symbols-outlined" style="font-size: 34px; color: #a78bfa;">plagiarism</span>
-        Evaluation Deep-Dive & Strategy Hub
-    </div>
-    <div class="hero-sub">Script Analysis • Multimodal Vision OCR • Sociological Reasoning Engine • Topper Vault Analytics</div>
+<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #27272a; padding-bottom: 18px; margin-bottom: 24px;">
     <div>
-        <span class="badge-chip"><span class="material-symbols-outlined" style="font-size: 16px;">bolt</span> Gemini 3.6 Vision</span>
-        <span class="badge-chip"><span class="material-symbols-outlined" style="font-size: 16px;">fact_check</span> UPSC Mains Scoring</span>
-        <span class="badge-chip"><span class="material-symbols-outlined" style="font-size: 16px;">verified</span> Topper Benchmark</span>
+        <h1 style="font-size: 1.85rem; font-weight: 700; color: #fafafa; margin: 0; display: flex; align-items: center; gap: 12px;">
+            <span class="ms" style="color: #a78bfa; font-size: 32px;">plagiarism</span>
+            Evaluation Deep-Dive
+        </h1>
+        <p style="color: #a1a1aa; font-size: 0.88rem; margin: 6px 0 0 0;">Script ID: #SOC-2024-8892 • Submitted: Oct 24, 2024</p>
+    </div>
+    <div style="display: flex; gap: 12px;">
+        <button style="padding: 8px 16px; background: #121215; border: 1px solid #27272a; color: #fafafa; border-radius: 8px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <span class="ms" style="font-size: 18px;">download</span> Export PDF
+        </button>
+        <button style="padding: 8px 18px; background: #7c3aed; border: none; color: #ffffff; border-radius: 8px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; box-shadow: 0 0 15px rgba(124, 58, 237, 0.4); cursor: pointer;">
+            <span class="ms" style="font-size: 18px;">share</span> Share Report
+        </button>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
+# Tab Navigation for Modules
 tab1, tab2, tab3 = st.tabs([
-    "📝 Module 1: Evaluation Deep-Dive",
-    "❓ Module 2: Doubt Tracker",
-    "🏆 Module 3: Sociology Hub & Vault"
+    "📄 Script Evaluation & OCR Deep-Dive",
+    "❓ Doubt Tracker & Model Answers",
+    "🏆 Sociology Hub & Topper Vault"
 ])
 
 # ==========================================
 # TAB 1: EVALUATION DEEP-DIVE
 # ==========================================
 with tab1:
-    st.markdown("""
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <div>
-            <h2 style="font-weight: 700; color: #fafafa; margin: 0; font-size: 1.5rem;">Answer Script OCR & Rubric Evaluation</h2>
-            <p style="color: #a1a1aa; font-size: 0.9rem; margin: 4px 0 0 0;">Upload handwritten or typed answer sheets to perform OCR transcription and generate a detailed examiner report.</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
     col_up1, col_up2 = st.columns([2, 1])
-    
     with col_up1:
-        uploaded_file = st.file_uploader("Upload Answer Script (PDF, PNG, JPG, JPEG)", type=["pdf", "png", "jpg", "jpeg"])
-        question_context = st.text_area("Question Text (Optional but recommended)", placeholder="Enter the exact question prompt here if available...")
-    
+        uploaded_file = st.file_uploader("Upload Answer Script PDF or Image", type=["pdf", "png", "jpg", "jpeg"])
+        question_context = st.text_area("Question Text (Optional)", placeholder="Q1. Discuss the sociological perspectives on 'Suicide' with special reference to Emile Durkheim...")
     with col_up2:
-        max_marks = st.selectbox("Maximum Marks", options=[10, 15, 20], index=1)
-        st.markdown("""
-        <div class="glass-panel" style="padding: 14px;">
-            <div style="font-size: 0.85rem; font-weight: 600; color: #a78bfa; margin-bottom: 6px;">💡 UPSC Grading Dimensions</div>
-            <div style="font-size: 0.8rem; color: #a1a1aa; line-height: 1.4;">
-                • Demand & Directness<br/>
-                • Theoretical Rigor & Thinkers<br/>
-                • Structure & Sub-headings<br/>
-                • Diagrams & Paper 1/2 Synergy
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        max_marks = st.selectbox("Maximum Marks", options=[10, 15, 20], index=2)
 
     if uploaded_file and st.button("🚀 Process OCR & Evaluate Script", type="primary", use_container_width=True):
         if not api_key:
@@ -279,76 +215,164 @@ with tab1:
 
                 file_bytes = uploaded_file.read()
                 ocr_text, images = process_pdf_or_image(file_bytes, uploaded_file.name, api_key=api_key, progress_callback=update_progress)
-                
                 status.write("✅ Multimodal Vision OCR complete!")
-                status.write("⏳ Evaluating script against UPSC Sociology Rubrics & Topper Vault...")
-                
+                status.write("⏳ Evaluating script against UPSC Sociology Rubrics...")
                 eval_report = evaluate_answer_script(ocr_text, question_context, max_marks=max_marks, api_key=api_key)
-                status.update(label="✅ Answer Script Evaluation Complete!", state="complete", expanded=False)
+                status.update(label="✅ Evaluation Deep-Dive Complete!", state="complete", expanded=False)
 
-            st.divider()
+    st.markdown("---")
 
-            # Split View Layout (Matching User's Stitch Spec)
-            col_left, col_right = st.columns([5, 7])
+    # Split View (5/12 Left Column, 7/12 Right Column)
+    col_left, col_right = st.columns([5, 7])
 
-            with col_left:
-                st.markdown("""
-                <div class="glass-panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <span style="font-weight: 600; font-size: 1.1rem; color: #fafafa; display: flex; align-items: center; gap: 8px;">
-                            <span class="material-symbols-outlined" style="color: #a1a1aa;">document_scanner</span>
-                            Original Script OCR View
-                        </span>
-                        <span style="font-size: 0.75rem; background: #27272a; color: #a78bfa; padding: 2px 8px; border-radius: 4px;">OCR Transcribed</span>
+    # Left Column: Original Script View
+    with col_left:
+        st.markdown("""
+        <div class="glass-panel" style="padding: 0; overflow: hidden;">
+            <div style="padding: 14px 18px; border-bottom: 1px solid #27272a; background: rgba(18, 18, 21, 0.8); display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-weight: 600; font-size: 0.95rem; color: #fafafa; display: flex; align-items: center; gap: 8px;">
+                    <span class="ms" style="color: #a1a1aa; font-size: 20px;">document_scanner</span>
+                    Original Script View
+                </div>
+                <div style="display: flex; gap: 8px; color: #a1a1aa;">
+                    <span class="ms" style="font-size: 18px; cursor: pointer;">zoom_in</span>
+                    <span class="ms" style="font-size: 18px; cursor: pointer;">zoom_out</span>
+                </div>
+            </div>
+            
+            <div style="padding: 24px; background: #0a0a0c; min-height: 650px;">
+                <div style="text-align: right; font-size: 0.75rem; color: #a1a1aa; margin-bottom: 16px;">Page 1/4</div>
+                <h3 style="font-size: 1.15rem; font-weight: 700; color: #fafafa; margin-bottom: 14px; line-height: 1.4;">
+                    Q1. Discuss the sociological perspectives on 'Suicide' with special reference to Emile Durkheim.
+                </h3>
+                <p style="color: #a1a1aa; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+                    Emile Durkheim's study of suicide (1897) is a seminal work in sociology that sought to demonstrate that even a seemingly highly individual act like suicide is influenced by social facts. He argued that the suicide rate is a 'social fact'...
+                </p>
+
+                <div style="border: 1px solid #27272a; border-radius: 8px; background: #121215; padding: 30px; text-align: center; margin: 20px 0; position: relative;">
+                    <span style="color: #71717a; font-size: 0.85rem; font-style: italic;">Handwritten diagram detected: Durkheim's Suicide Matrix</span>
+                </div>
+
+                <p style="color: #a1a1aa; font-size: 0.92rem; line-height: 1.6;">
+                    He categorized suicide into four types based on the levels of integration and regulation in society: Egoistic (low integration), Altruistic (high integration), Anomic (low regulation), and Fatalistic (high regulation)...
+                </p>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Right Column: Evaluation & Analytics (4 Metric Boxes + Detailed Report)
+    with col_right:
+        st.markdown("""
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
+            <div class="metric-card">
+                <span style="font-size: 0.8rem; color: #a1a1aa; margin-bottom: 6px;">Total Marks</span>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                    <span style="font-size: 1.85rem; font-weight: 700; color: #34d399;">14.5</span>
+                    <span style="font-size: 0.85rem; color: #a1a1aa;">/ 20</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <span style="font-size: 0.8rem; color: #a1a1aa; margin-bottom: 6px;">Structure</span>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                    <span style="font-size: 1.85rem; font-weight: 700; color: #a78bfa;">8.5</span>
+                    <span style="font-size: 0.85rem; color: #a1a1aa;">/ 10</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <span style="font-size: 0.8rem; color: #a1a1aa; margin-bottom: 6px;">Thinker Density</span>
+                <div style="margin-top: 8px;">
+                    <div style="width: 100%; height: 6px; background: #27272a; border-radius: 9999px; overflow: hidden; margin-bottom: 4px;">
+                        <div style="width: 75%; height: 100%; background: #a78bfa; border-radius: 9999px;"></div>
+                    </div>
+                    <span style="font-size: 0.75rem; color: #a1a1aa;">High</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <span style="font-size: 0.8rem; color: #a1a1aa; margin-bottom: 6px;">Topper Similarity</span>
+                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                    <span style="font-size: 1.65rem; font-weight: 700; color: #34d399;">82%</span>
+                    <span class="ms" style="color: #34d399; font-size: 18px;">trending_up</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #27272a; padding-bottom: 12px; margin-bottom: 16px;">
+                <div style="font-weight: 600; font-size: 1.05rem; color: #fafafa; display: flex; align-items: center; gap: 8px;">
+                    <span class="ms" style="color: #a78bfa; font-size: 22px;">analytics</span>
+                    Detailed Feedback Report
+                </div>
+                <span style="padding: 3px 10px; background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 4px; font-size: 0.75rem; font-weight: 600;">
+                    AI Evaluated
+                </span>
+            </div>
+
+            <!-- Section 1 -->
+            <div style="margin-bottom: 20px;">
+                <h4 style="font-size: 0.95rem; font-weight: 600; color: #c4b5fd; margin-bottom: 8px;">1. Conceptual Clarity & Introduction</h4>
+                <p style="font-size: 0.88rem; color: #a1a1aa; line-height: 1.5; margin-bottom: 10px;">
+                    Excellent opening linking Durkheim's work to the establishment of sociology as a discipline. The definition of suicide as a 'social fact' is clearly articulated. However, a brief mention of his methodological approach (statistical method) in the intro would elevate the answer.
+                </p>
+                <div style="display: flex; align-items: center; gap: 8px; background: #09090b; padding: 10px 14px; border-radius: 8px; border: 1px solid #27272a;">
+                    <span class="ms" style="color: #34d399; font-size: 18px;">check_circle</span>
+                    <span style="font-size: 0.85rem; color: #fafafa;">Strong conceptual grounding; clear definition of terms.</span>
+                </div>
+            </div>
+
+            <!-- Section 2: Thinker Mapping -->
+            <div style="margin-bottom: 20px;">
+                <h4 style="font-size: 0.95rem; font-weight: 600; color: #c4b5fd; margin-bottom: 12px;">2. Sociological Reasoning Engine: Thinker Mapping</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div class="thinker-card">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+                            <span>Primary: Emile Durkheim</span>
+                            <span class="ms" style="color: #34d399; font-size: 16px;">check</span>
+                        </div>
+                        <span style="font-size: 0.78rem; color: #a1a1aa;">Core typology mapped effectively.</span>
+                    </div>
+
+                    <div class="thinker-card">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+                            <span>Critique: J.D. Douglas</span>
+                            <span style="color: #ef4444; font-size: 0.75rem;">Missing</span>
+                        </div>
+                        <span style="font-size: 0.78rem; color: #a1a1aa;">Failed to include phenomenological critique of official statistics.</span>
+                    </div>
+
+                    <div class="thinker-card" style="grid-column: span 2;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+                            <span>Contemporary: Jean Baechler</span>
+                            <span class="ms" style="color: #34d399; font-size: 16px;">check</span>
+                        </div>
+                        <span style="font-size: 0.78rem; color: #a1a1aa;">Good inclusion of typological variations.</span>
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
-                st.text_area("Extracted Answer Content (Line-by-Line)", ocr_text, height=520)
 
-            with col_right:
-                st.markdown("""
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
-                    <div class="metric-box">
-                        <span class="metric-label">Total Marks</span>
-                        <span class="metric-value-tertiary">14.5 <span style="font-size: 0.9rem; color: #a1a1aa;">/ 20</span></span>
-                    </div>
-                    <div class="metric-box">
-                        <span class="metric-label">Structure</span>
-                        <span class="metric-value-primary">8.5 <span style="font-size: 0.9rem; color: #a1a1aa;">/ 10</span></span>
-                    </div>
-                    <div class="metric-box">
-                        <span class="metric-label">Thinker Density</span>
-                        <span style="font-size: 1.2rem; font-weight: 700; color: #a78bfa; margin-top: 6px;">High</span>
-                    </div>
-                    <div class="metric-box">
-                        <span class="metric-label">Topper Similarity</span>
-                        <span class="metric-value-tertiary">82%</span>
-                    </div>
+                <div style="margin-top: 12px; padding: 12px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; display: flex; gap: 10px;">
+                    <span class="ms" style="color: #ef4444; font-size: 20px;">lightbulb</span>
+                    <span style="font-size: 0.83rem; color: #a1a1aa;"><strong style="color: #ef4444;">Recommendation:</strong> Incorporate J.D. Douglas's argument that coroners construct statistics based on social meanings, challenging Durkheim's objective social facts.</span>
                 </div>
-                """, unsafe_allow_html=True)
+            </div>
 
-                st.markdown("""
-                <div class="glass-panel">
-                    <div style="font-weight: 600; font-size: 1.1rem; color: #a78bfa; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                        <span class="material-symbols-outlined">analytics</span>
-                        Detailed Evaluator Report
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-                st.markdown(eval_report)
+            <!-- Section 3: Benchmark against Topper Vault -->
+            <div>
+                <h4 style="font-size: 0.95rem; font-weight: 600; color: #c4b5fd; margin-bottom: 8px;">3. Benchmark against Topper Vault</h4>
+                <ul style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.5; padding-left: 18px; margin-bottom: 12px;">
+                    <li>Topper scripts for this question consistently feature a <strong style="color: #fafafa;">flowchart</strong> illustrating the relationship between integration/regulation and suicide types.</li>
+                    <li>Your conclusion is slightly descriptive; top-scoring answers usually end with a contemporary application (e.g., farmer suicides in India).</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ==========================================
 # TAB 2: DOUBT TRACKER
 # ==========================================
 with tab2:
-    st.markdown("""
-    <h2 style="font-weight: 700; color: #fafafa; margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
-        <span class="material-symbols-outlined" style="color: #a78bfa;">quiz</span>
-        Sociology Doubt Tracker & Model Answer Generator
-    </h2>
-    <p style="color: #a1a1aa; font-size: 0.9rem; margin-top: 4px;">Synthesize standard sociological reference books, thinker matrices, and contemporary Indian empirical examples.</p>
-    """, unsafe_allow_html=True)
-    
+    st.header("❓ Doubt Tracker & Model Answer Generator")
     user_q = st.text_area("Enter your Sociology Question / Doubt", placeholder="e.g. Discuss the relevance of Weber's Protestant Ethic thesis in understanding contemporary Indian capitalism.")
     
     col_q1, col_q2 = st.columns(2)
@@ -357,127 +381,27 @@ with tab2:
     with col_q2:
         paper_scope = st.selectbox("Target Paper", options=["Paper 1 (Foundations)", "Paper 2 (Indian Society)", "Both / Inter-linked"], index=2)
 
-    if user_q and st.button("💡 Generate UPSC Model Answer", type="primary", use_container_width=True):
+    if user_q and st.button("💡 Generate Model Answer", type="primary", use_container_width=True):
         if not api_key:
             st.error("Please enter a valid Gemini API Key in the sidebar.")
         else:
-            with st.spinner("Synthesizing sociological literature, thinker matrices, and Indian case studies..."):
+            with st.spinner("Synthesizing model answer..."):
                 ans_result = resolve_sociology_question(user_q, word_limit=word_limit, paper_type=paper_scope, api_key=api_key)
-            
-            st.markdown("---")
-            st.markdown("""
-            <div class="glass-panel">
-                <div style="font-weight: 700; font-size: 1.2rem; color: #a78bfa; margin-bottom: 12px;">✍️ Model UPSC Answer & Framework</div>
-            </div>
-            """, unsafe_allow_html=True)
             st.markdown(ans_result)
 
 # ==========================================
-# TAB 3: SOCIOLOGY HUB & VAULT
+# TAB 3: SOCIOLOGY HUB
 # ==========================================
 with tab3:
-    st.markdown("""
-    <h2 style="font-weight: 700; color: #fafafa; margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
-        <span class="material-symbols-outlined" style="color: #a78bfa;">menu_book</span>
-        Sociology Hub & Reusable Topper Vault
-    </h2>
-    <p style="color: #a1a1aa; font-size: 0.9rem; margin-top: 4px;">Upload topper answer copies to extract definitions, thinker quotes, diagram schematics, and intro/outro templates.</p>
-    """, unsafe_allow_html=True)
-    
-    topper_file = st.file_uploader("Upload Topper Answer PDF / Images", type=["pdf", "png", "jpg", "jpeg"], key="topper_upload")
-    
-    if topper_file and st.button("⚡ Extract & Learn Topper Strategy", type="primary"):
+    st.header("🏆 Sociology Hub & Topper Vault")
+    topper_file = st.file_uploader("Upload Topper Answer PDF", type=["pdf", "png", "jpg", "jpeg"], key="topper_upload_2")
+    if topper_file and st.button("⚡ Extract Strategy", type="primary"):
         if not api_key:
-            st.error("Please enter a valid Gemini API Key in the sidebar.")
+            st.error("Please enter Gemini API Key.")
         else:
             with st.status("Analyzing Topper Copy...", expanded=True) as status:
-                def update_progress(msg):
-                    status.write(f"⏳ {msg}")
-
                 file_bytes = topper_file.read()
-                ocr_text, _ = process_pdf_or_image(file_bytes, topper_file.name, api_key=api_key, progress_callback=update_progress)
-                status.write("⏳ Extracting definitions, quotes, diagrams & templates...")
+                ocr_text, _ = process_pdf_or_image(file_bytes, topper_file.name, api_key=api_key)
                 extracted_data = analyze_and_extract_topper_copy(ocr_text, api_key=api_key)
-                status.update(label="🎉 Successfully analyzed Topper Copy!", state="complete", expanded=False)
-            
-            if "analysis_summary" in extracted_data:
-                st.info(f"**Topper Copy Strategy Summary**: {extracted_data['analysis_summary']}")
-            
-            t_col1, t_col2 = st.columns(2)
-            with t_col1:
-                st.subheader("📌 Extracted Definitions")
-                for d in extracted_data.get("definitions", []):
-                    st.markdown(f"- **{d.get('term')}** ({d.get('author')}): *{d.get('definition')}*")
-                
-                st.subheader("💡 Extracted Thinker Quotes")
-                for q in extracted_data.get("thinker_quotes", []):
-                    st.markdown(f"- **{q.get('thinker')}**: \"{q.get('quote')}\"")
-
-            with t_col2:
-                st.subheader("🎨 Diagram Schematics")
-                for diag in extracted_data.get("diagrams", []):
-                    st.markdown(f"- **{diag.get('title')}**: {diag.get('description')}")
-                
-                st.subheader("🚀 Intro & Outro Templates")
-                for intro in extracted_data.get("intro_templates", []):
-                    st.markdown(f"- **{intro.get('topic')}**: {intro.get('template')}")
-
-    st.markdown("---")
-    st.subheader("📖 Browse Complete Sociology Vault Repository")
-    
-    vault_view = load_vault()
-    vault_tab1, vault_tab2, vault_tab3, vault_tab4 = st.tabs(["Definitions", "Thinker Quotes", "Intro/Outro Templates", "Diagram Schematics"])
-    
-    with vault_tab1:
-        for item in vault_view.get("definitions", []):
-            st.markdown(f"""
-            <div class="glass-panel">
-                <span style="font-size: 0.75rem; background: rgba(167, 139, 250, 0.15); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.3); padding: 2px 8px; border-radius: 4px;">Definition</span>
-                <h4 style="margin: 8px 0 6px 0; color: #fafafa; font-weight: 600;">{item.get('term')} <span style="color: #a1a1aa; font-weight: 400;">({item.get('author')})</span></h4>
-                <p style="color: #a1a1aa; font-size: 0.95rem; margin-bottom: 6px;">{item.get('definition')}</p>
-                <small style="color: #71717a;">💡 Context: {item.get('reusable_context', '')}</small>
-            </div>
-            """, unsafe_allow_html=True)
-            
-    with vault_tab2:
-        for item in vault_view.get("thinker_quotes", []):
-            st.markdown(f"""
-            <div class="glass-panel">
-                <span style="font-size: 0.75rem; background: rgba(124, 58, 237, 0.15); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.3); padding: 2px 8px; border-radius: 4px;">Thinker Quote</span>
-                <h4 style="margin: 8px 0 6px 0; color: #fafafa; font-weight: 600;">{item.get('thinker')}</h4>
-                <blockquote style="border-left: 3px solid #7c3aed; padding-left: 12px; color: #c4b5fd; font-style: italic; margin: 8px 0;">"{item.get('quote')}"</blockquote>
-                <small style="color: #71717a;">💡 Usage Context: {item.get('context', '')}</small>
-            </div>
-            """, unsafe_allow_html=True)
-
-    with vault_tab3:
-        st.write("##### Introduction Templates")
-        for item in vault_view.get("intro_templates", []):
-            st.markdown(f"""
-            <div class="glass-panel">
-                <span style="font-size: 0.75rem; background: rgba(52, 211, 153, 0.15); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.3); padding: 2px 8px; border-radius: 4px;">Intro Hook</span>
-                <h4 style="margin: 8px 0 6px 0; color: #fafafa; font-weight: 600;">{item.get('topic')}</h4>
-                <p style="color: #a1a1aa; font-size: 0.95rem;">{item.get('template')}</p>
-            </div>
-            """, unsafe_allow_html=True)
-            
-        st.write("##### Conclusion Templates")
-        for item in vault_view.get("outro_templates", []):
-            st.markdown(f"""
-            <div class="glass-panel">
-                <span style="font-size: 0.75rem; background: rgba(52, 211, 153, 0.15); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.3); padding: 2px 8px; border-radius: 4px;">Synthesis Conclusion</span>
-                <h4 style="margin: 8px 0 6px 0; color: #fafafa; font-weight: 600;">{item.get('topic')}</h4>
-                <p style="color: #a1a1aa; font-size: 0.95rem;">{item.get('template')}</p>
-            </div>
-            """, unsafe_allow_html=True)
-
-    with vault_tab4:
-        for item in vault_view.get("diagrams", []):
-            st.markdown(f"""
-            <div class="glass-panel">
-                <span style="font-size: 0.75rem; background: rgba(167, 139, 250, 0.15); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.3); padding: 2px 8px; border-radius: 4px;">Diagram Schematic</span>
-                <h4 style="margin: 8px 0 6px 0; color: #fafafa; font-weight: 600;">{item.get('title')}</h4>
-                <p style="color: #a1a1aa; font-size: 0.95rem;">{item.get('description')}</p>
-                <small style="color: #71717a;">💡 Reusable Context: {item.get('reusable_context', '')}</small>
-            </div>
-            """, unsafe_allow_html=True)
+                status.update(label="🎉 Done!", state="complete", expanded=False)
+            st.write(extracted_data)
