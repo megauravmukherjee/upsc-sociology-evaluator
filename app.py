@@ -75,12 +75,24 @@ selected_subject = st.sidebar.selectbox(
     index=0
 )
 
-api_key = st.sidebar.text_input("Gemini API Key", type="password", value=os.environ.get("GEMINI_API_KEY", ""))
+# Secure API Key Management (Never expose server keys in UI text inputs)
+server_key = os.environ.get("GEMINI_API_KEY")
+if not server_key and hasattr(st, "secrets"):
+    try:
+        server_key = st.secrets.get("GEMINI_API_KEY")
+    except Exception:
+        pass
 
-if not api_key:
-    st.sidebar.warning("⚠️ Please enter your Gemini API key to run evaluation and OCR features.")
+if server_key:
+    st.sidebar.success("🔒 API Key: Active (Secured Backend)")
+    with st.sidebar.expander("🔑 Override API Key (Optional)", expanded=False):
+        user_override = st.text_input("Custom Gemini API Key", type="password", help="Leave blank to use secured backend API key.")
+        api_key = user_override.strip() if user_override.strip() else server_key
 else:
-    st.sidebar.success("✅ Gemini API Key detected.")
+    user_key = st.sidebar.text_input("Enter Gemini API Key", type="password")
+    if not user_key:
+        st.sidebar.warning("⚠️ Please enter a Gemini API Key to enable AI features.")
+    api_key = user_key.strip()
 
 st.sidebar.divider()
 
