@@ -1,88 +1,70 @@
 {
-  "paper_1": {
-    "title": "Fundamentals of Sociology",
-    "topics": [
-      {
-        "unit": 1,
-        "name": "Sociology - The Discipline",
-        "keywords": ["Modernity and social changes in Europe", "Scope of the subject", "Comparison with other social sciences", "Sociology and common sense"]
-      },
-      {
-        "unit": 2,
-        "name": "Sociology as Science",
-        "keywords": ["Science, scientific method and critique", "Positivism and its critique", "Fact value and objectivity", "Non-positivist methodologies"]
-      },
-      {
-        "unit": 3,
-        "name": "Research Methods and Analysis",
-        "keywords": ["Qualitative and quantitative methods", "Techniques of data collection", "Variables, sampling, hypothesis, reliability and validity"]
-      },
-      {
-        "unit": 4,
-        "name": "Sociological Thinkers",
-        "thinkers": [
-          {"name": "Karl Marx", "concepts": ["Historical materialism", "Mode of production", "Alienation", "Class struggle"]},
-          {"name": "Emile Durkheim", "concepts": ["Division of labour", "Social fact", "Suicide", "Religion and society"]},
-          {"name": "Max Weber", "concepts": ["Social action", "Ideal types", "Authority and bureaucracy", "Protestant ethic and the spirit of capitalism"]},
-          {"name": "Talcott Parsons", "concepts": ["Social system", "Pattern variables", "AGIL paradigm"]},
-          {"name": "Robert K. Merton", "concepts": ["Latent and manifest functions", "Conformity and deviance", "Reference groups"]},
-          {"name": "Mead", "concepts": ["Self and identity", "Symbolic interactionism"]}
-        ]
-      },
-      {
-        "unit": 5,
-        "name": "Stratification and Mobility",
-        "keywords": ["Concepts - equality, inequality, hierarchy, exclusion", "Theories - Structural functionalist, Marxist, Weberian", "Dimensions - Class, status, gender, ethnicity", "Social mobility"]
-      },
-      {
-        "unit": 6,
-        "name": "Works and Economic Life",
-        "keywords": ["Social organization of work in different societies", "Formal and informal organization of work", "Labour and society"]
-      },
-      {
-        "unit": 7,
-        "name": "Politics and Society",
-        "keywords": ["Sociological theories of power", "Power elite, bureaucracy, pressure groups, political parties", "Nation, state, citizenship, democracy", "Social movements, revolution"]
-      },
-      {
-        "unit": 8,
-        "name": "Religion and Society",
-        "keywords": ["Sociological theories of religion", "Types of religious practices", "Religion in modern society - secularization, fundamentalism, religious revivalism"]
-      },
-      {
-        "unit": 9,
-        "name": "Systems of Kinship",
-        "keywords": ["Family, household, marriage", "Types and forms of family", "Lineage and descent", "Patriarchy and sexual division of labour"]
-      },
-      {
-        "unit": 10,
-        "name": "Social Change in Modern Society",
-        "keywords": ["Sociological theories of social change", "Development and dependency", "Agents of social change", "Education and social change"]
-      }
+  "gs1": {
+    "title": "GS 1: History, Heritage, Geography & Indian Society",
+    "subtopics": [
+      "Art & Culture: Architecture, Literature, Performing Arts from Ancient to Modern times",
+      "Modern Indian History: Mid-18th century to present, Freedom Struggle & personalities",
+      "Post-Independence Consolidation & Reorganization within the country",
+      "World History: 18th century events, Industrial Revolution, World Wars, Colonization & Decolonization",
+      "Indian Society: Diversity, Role of Women, Population, Poverty, Urbanization, Globalization, Communalism, Regionalism, Secularism",
+      "Physical & Human Geography: Key natural resources, Industrial location factors, Important geophysical phenomena (Earthquakes, Tsunami, Volcanoes, Cyclones)"
     ]
   },
-  "paper_2": {
-    "title": "Indian Society: Structure and Change",
-    "topics": [
-      {
-        "section": "A",
-        "name": "Introducing Indian Society",
-        "thinkers": [
-          {"name": "G.S. Ghurye", "approach": "Indology, Caste and Race"},
-          {"name": "M.N. Srinivas", "approach": "Structural-Functionalism, Dominant Caste, Sanskritization"},
-          {"name": "A.R. Desai", "approach": "Marxist perspective, Nationalism and Agrarian structure"}
-        ]
-      },
-      {
-        "section": "B",
-        "name": "Social Structure",
-        "keywords": ["Caste system - Perspective of Ghurye, Srinivas, Dumont, Ambedkar", "Agrarian class structure", "Industrial class structure", "Middle class in India", "Kinship systems in India", "Religion and society in India"]
-      },
-      {
-        "section": "C",
-        "name": "Social Changes in India",
-        "keywords": ["Visions of social change - Constitution, Planning, Development", "Rural and agrarian transformation", "Industrialization and urbanization", "Politics and society in India", "Social movements in modern India - Backward classes, Dalit, Women, Environmental", "Population dynamics", "Challenges of social transformation"]
-      }
+  "gs2": {
+    "title": "GS 2: Governance, Constitution, Polity, Social Justice & IR",
+    "subtopics": [
+      "Indian Constitution: Historical underpinnings, Evolution, Features, Amendments, Basic Structure",
+      "Functions & Responsibilities of Union and States, Issues of Federal Structure, Devolution of powers",
+      "Separation of Powers, Dispute Redressal Mechanisms and Institutions",
+      "Comparison of Indian constitutional scheme with other countries",
+      "Parliament and State Legislatures: Structure, functioning, conduct of business, powers & privileges",
+      "Executive and Judiciary: Structure, organization, Ministries, Departments, Statutory & Regulatory bodies",
+      "Government policies, Development processes, Welfare schemes for vulnerable sections",
+      "Governance, Transparency, Accountability, E-governance, Citizen Charters, Role of Civil Services",
+      "International Relations: India and its neighborhood, Bilateral & Regional groupings, Global institutions"
+    ]
+  },
+  "gs3": {
+    "title": "GS 3: Technology, Economic Development, Environment, Security & Disaster Mgmt",
+    "subtopics": [
+      "Indian Economy: Planning, Mobilization of resources, Growth, Development and Employment",
+      "Inclusive growth and issues arising from it, Government Budgeting",
+      "Major crops, Irrigation systems, Storage, Transport & Marketing of agricultural produce, E-technology",
+      "Land Reforms in India, Effects of Liberalization on Economy, Industrial Policy",
+      "Infrastructure: Energy, Ports, Roads, Airports, Railways",
+      "Science and Technology: Developments, Applications in everyday life, Indigenization of tech, IT, Space, Biotech, IPR",
+      "Environment: Conservation, Environmental Pollution & Degradation, Environmental Impact Assessment (EIA)",
+      "Disaster and Disaster Management: Sendai Framework, NDMA, Risk reduction",
+      "Linkages between Development and Extremism, Role of External State & Non-state actors in Internal Security",
+      "Cyber Security, Money Laundering, Border Area Management, Organized Crime"
+    ]
+  },
+  "gs4": {
+    "title": "GS 4: Ethics, Integrity and Aptitude",
+    "subtopics": [
+      "Ethics and Human Interface: Essence, Determinants, Consequences of Ethics in Human Actions, Dimensions of Ethics, Ethics in private/public relationships",
+      "Human Values: Lessons from lives and teachings of great leaders, reformers, administrators",
+      "Attitude: Content, structure, function, influence on thought and behavior, Moral and Political attitudes, Social influence and persuasion",
+      "Aptitude & Foundational Values for Civil Service: Integrity, Impartiality, Non-partisanship, Objectivity, Dedication to public service, Empathy, Tolerance, Compassion",
+      "Emotional Intelligence: Concepts, utilities and application in administration and governance",
+      "Contributions of Moral Thinkers and Philosophers from India and World (Socrates, Kant, Mill, Gandhi, Kautilya)",
+      "Public/Civil Service Values and Ethics in Public Administration: Dilemmas, Laws, Regulations, Ethical Guidance, Probity in Governance, Citizen's Charters, Work Culture, Corruption",
+      "Case Studies on Ethical Issues and Administrative Dilemmas"
+    ]
+  },
+  "essay": {
+    "title": "UPSC CSE Essay Paper",
+    "subtopics": [
+      "Section A: Philosophical, Abstract, Ethical and Meta-physical Themes",
+      "Section B: Socio-Economic, Administrative, Governance, International and Technological Themes",
+      "Evaluation Criteria: Keeping closely to the subject of the essay, arranging ideas in orderly fashion, concise expression, effective argument building, visionary conclusion"
+    ]
+  },
+  "sociology": {
+    "title": "Sociology Optional (Paper 1 & Paper 2)",
+    "subtopics": [
+      "Paper 1: Fundamentals of Sociology (Marx, Durkheim, Weber, Parsons, Merton, Mead, Stratification, Kinship, Religion, Social Change)",
+      "Paper 2: Indian Society (Ghurye, Srinivas, A.R. Desai, Caste, Agrarian Class, Politics, Social Movements, Population Dynamics)"
     ]
   }
 }
