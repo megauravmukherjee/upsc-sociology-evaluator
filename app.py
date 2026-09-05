@@ -132,10 +132,11 @@ with st.sidebar.expander("📖 Syllabus Quick Reference"):
 st.markdown(f'<div class="main-header">UPSC CSE {selected_subject} AI Hub</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="sub-header">Evaluate handwritten scripts for {selected_subject} with Vision OCR, solve doubts without subject bleeding, and train your Strategy Vault with Topper copies.</div>', unsafe_allow_html=True)
 
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4 = st.tabs([
     "📄 Module 1: Answer Script Evaluator",
     "❓ Module 2: Doubt & PYQ Resolver",
-    "🏆 Module 3: Topper Vault & Analytics"
+    "🏆 Module 3: Topper Vault & Analytics",
+    "📚 Module 4: Memory & Grounding"
 ])
 
 # ==========================================
@@ -337,3 +338,38 @@ with tab3:
         for item in vault_view.get("intro_templates", []):
             st.markdown(f"**{item.get('topic')}**: {item.get('template')}")
 
+# ==========================================
+# TAB 4: MEMORY & GROUNDING
+# ==========================================
+with tab4:
+    st.header("📚 AI Grounding Memory & Past Evaluations")
+    st.markdown("Your past evaluations and model answers are stored here and automatically retrieved by the AI to maintain consistent grading strictness and style across sessions.")
+    
+    # Import db here just for the tab if needed, but better to import at the top. 
+    # Since I can't easily replace the top and bottom at the exact same time without a single big replace, 
+    # I'll import `from core import db` right here in the block.
+    from core import db
+    
+    mtab1, mtab2 = st.tabs(["📝 Past Evaluations", "❓ Past Model Answers"])
+    
+    with mtab1:
+        past_evals = db.get_all_evaluations()
+        if not past_evals:
+            st.info("No past evaluations found yet. Run an evaluation to start building memory!")
+        else:
+            for ev in past_evals:
+                with st.expander(f"{ev['timestamp']} | {ev['subject']} | Score: {ev['max_marks']} Marks"):
+                    st.write("**Question:**", ev.get("question_context") or "N/A")
+                    st.markdown("**Evaluation Report:**")
+                    st.markdown(ev["evaluation_text"])
+    
+    with mtab2:
+        past_qas = db.get_all_model_answers()
+        if not past_qas:
+            st.info("No past model answers found yet.")
+        else:
+            for qa in past_qas:
+                with st.expander(f"{qa['timestamp']} | {qa['subject']}"):
+                    st.write("**Question/Doubt:**", qa["question"])
+                    st.markdown("**Model Answer:**")
+                    st.markdown(qa["answer_text"])

@@ -1,32 +1,59 @@
 import json
 import os
 from google import genai
+from google.genai import types
 import config
+from core import db
 
 def resolve_upsc_question(user_question, word_limit=250, paper_type="Both", subject="Sociology Optional", api_key=None):
     """
-    Answers direct user conceptual doubts or UPSC PYQs using Anudeep Durishetty AIR 1 subject frameworks.
-    Guarantees strict subject isolation without forcing Sociology thinkers into GS or Essay papers.
+    Generates a model answer or conceptual breakdown for a given UPSC question.
     """
     key = api_key or os.environ.get("GEMINI_API_KEY")
     if not key:
-        raise ValueError("Gemini API key is required. Please set GEMINI_API_KEY environment variable or provide it in the UI.")
+        raise ValueError("Gemini API key is required.")
     
     client = genai.Client(api_key=key)
 
-    # Force alignment if paper_type is specified and subject defaults
-    if paper_type in config.SUBJECT_QA_PROMPTS and subject == "Sociology Optional" and paper_type != "Sociology Optional":
-        subject = paper_type
+    # Load from Vault for exact definitions
+    vault_path = os.path.join(os.path.dirname(__file__), "..", "data", "vault.json")
+    vault_data = {}
+    if os.path.exists(vault_path):
+        try:
+            with open(vault_path, "r", encoding="utf-8") as f:
+                vault_data = json.load(f)
+        except Exception:
+            pass
+
+    # Basic Vault lookup
+    relevant_defs = []
+    if vault_data and "definitions" in vault_data:
+        for d in vault_data["definitions"]:
+            if d.get("term", "").lower() in user_question.lower():
+                author_str = f" ({d.get('author')})" if d.get("author") else ""
+                relevant_defs.append(f"{d.get('term')}{author_str}: {d.get('definition')}")
+
+    vault_injection = ""
+    if relevant_defs:
+        vault_injection = f"\nRelevant Vault Definitions:\n" + "\n".join(relevant_defs)
 
     subject_prompt = config.SUBJECT_QA_PROMPTS.get(subject, config.SUBJECT_QA_PROMPTS["Sociology Optional"])
 
-    prompt = f"""
-    Target Subject: {subject}
-    Target Question: "{user_question}"
-    Target Word Limit: {word_limit} words
-    Target Paper Scope: {paper_type}
+    # AI Grounding Memory
+    past_answers = db.get_past_model_answers(subject, limit=2)
+    memory_context = ""
+    if past_answers:
+        memory_context = "\n\n--- AI GROUNDING MEMORY: PAST MODEL ANSWERS ---\nFor consistency, maintain a similar analytical depth and style to these past model answers:\n"
+        for idx, ans in enumerate(past_answers):
+            memory_context += f"Model Answer {idx+1} (Preview):\n{ans['answer_text'][:500]}...\n"
 
-    CRITICAL SUBJECT ISOLATION RULE:
+    system_prompt = f"{subject_prompt}\n\n{vault_injection}{memory_context}"
+
+    prompt = f"""
+    TARGET QUESTION / DOUBT: {user_question}
+    TARGET WORD LIMIT: ~{word_limit} words
+    TARGET PAPER: {paper_type}
+    
     You are generating a model response for {subject}.
     DO NOT include or demand Sociology optional thinkers (such as Marx, Durkheim, Weber, Srinivas, Parsons, Merton, Mead) UNLESS the subject is explicitly 'Sociology Optional'!
 
@@ -40,12 +67,19 @@ def resolve_upsc_question(user_question, word_limit=250, paper_type="Both", subj
 
     response = client.models.generate_content(
         model=config.DEFAULT_MODEL,
-        contents=[subject_prompt, prompt]
+        contents=[system_prompt, prompt]
     )
 
-    return response.text
+    ans_result = response.text
+    
+    # Save the model answer to the memory database
+    try:
+        db.save_model_answer(subject, user_question, ans_result)
+    except Exception as e:
+        print(f"Failed to save model answer to DB: {e}")
+
+    return ans_result
 
 # Alias for backwards compatibility
 def resolve_sociology_question(user_question, word_limit=250, paper_type="Both", subject="Sociology Optional", api_key=None):
     return resolve_upsc_question(user_question, word_limit=word_limit, paper_type=paper_type, subject=subject, api_key=api_key)
-

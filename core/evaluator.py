@@ -3,6 +3,7 @@ import os
 from google import genai
 from google.genai import types
 import config
+from core import db
 
 def load_vault():
     vault_path = os.path.join(os.path.dirname(__file__), "..", "data", "vault.json")
@@ -67,8 +68,16 @@ def evaluate_answer_script(answer_text, question_context="", max_marks=15, subje
             if rhetoricals:
                 vault_summary += f"- Topper Rhetorical Endings: {'; '.join(rhetoricals)}\n"
 
+    # AI Grounding Memory
+    past_evals = db.get_past_evaluations(subject, limit=2)
+    memory_context = ""
+    if past_evals:
+        memory_context = "\n\n--- AI GROUNDING MEMORY: PAST EVALUATIONS ---\nFor consistency, align your grading strictness and style with these recent evaluations you performed:\n"
+        for idx, ev in enumerate(past_evals):
+            memory_context += f"Evaluation {idx+1} Score/Feedback Summary:\n{ev['evaluation_text'][:500]}...\n"
+
     subject_prompt = config.SUBJECT_PROMPTS.get(subject, config.SUBJECT_PROMPTS["Sociology Optional"])
-    system_prompt = f"{config.SYSTEM_EVALUATOR_PROMPT_BASE}\n\n{subject_prompt}\n\n{vault_summary}"
+    system_prompt = f"{config.SYSTEM_EVALUATOR_PROMPT_BASE}\n\n{subject_prompt}\n\n{vault_summary}{memory_context}"
 
     prompt = f"""
     Evaluate the following UPSC CSE Mains Answer Script.
@@ -119,6 +128,14 @@ def evaluate_answer_script(answer_text, question_context="", max_marks=15, subje
             contents=[system_prompt, prompt]
         )
 
-    return response.text
+    eval_result = response.text
+    
+    # Save the evaluation to the memory database
+    try:
+        db.save_evaluation(subject, question_context, answer_text, eval_result, max_marks)
+    except Exception as e:
+        print(f"Failed to save evaluation to DB: {e}")
+
+    return eval_result
 
 
