@@ -4,6 +4,7 @@ from google import genai
 from google.genai import types
 import config
 from core import db
+from core.rag_search import search_personal_notes
 
 def load_vault():
     vault_path = os.path.join(os.path.dirname(__file__), "..", "data", "vault.json")
@@ -68,7 +69,7 @@ def evaluate_answer_script(answer_text, question_context="", max_marks=15, subje
             if rhetoricals:
                 vault_summary += f"- Topper Rhetorical Endings: {'; '.join(rhetoricals)}\n"
 
-    # AI Grounding Memory
+    # AI Grounding Memory (Past Evals)
     past_evals = db.get_past_evaluations(subject, limit=2)
     memory_context = ""
     if past_evals:
@@ -76,8 +77,18 @@ def evaluate_answer_script(answer_text, question_context="", max_marks=15, subje
         for idx, ev in enumerate(past_evals):
             memory_context += f"Evaluation {idx+1} Score/Feedback Summary:\n{ev['evaluation_text'][:500]}...\n"
 
+    # Personal Notes RAG Injection
+    rag_context = ""
+    # Search notes based on the question (or the answer text if question is missing)
+    search_query = question_context if question_context else answer_text[:1000]
+    relevant_notes = search_personal_notes(search_query, subject, api_key=key, top_k=3)
+    if relevant_notes:
+        rag_context = "\n\n--- YOUR PERSONAL NOTES (RAG) ---\nEnsure your evaluation points out if the student missed any of these highly relevant facts from their own notes:\n"
+        for note in relevant_notes:
+            rag_context += f"- {note}\n"
+
     subject_prompt = config.SUBJECT_PROMPTS.get(subject, config.SUBJECT_PROMPTS["Sociology Optional"])
-    system_prompt = f"{config.SYSTEM_EVALUATOR_PROMPT_BASE}\n\n{subject_prompt}\n\n{vault_summary}{memory_context}"
+    system_prompt = f"{config.SYSTEM_EVALUATOR_PROMPT_BASE}\n\n{subject_prompt}\n\n{vault_summary}{memory_context}{rag_context}"
 
     prompt = f"""
     Evaluate the following UPSC CSE Mains Answer Script.

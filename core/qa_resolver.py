@@ -4,6 +4,7 @@ from google import genai
 from google.genai import types
 import config
 from core import db
+from core.rag_search import search_personal_notes
 
 def resolve_upsc_question(user_question, word_limit=250, paper_type="Both", subject="Sociology Optional", api_key=None):
     """
@@ -46,8 +47,16 @@ def resolve_upsc_question(user_question, word_limit=250, paper_type="Both", subj
         memory_context = "\n\n--- AI GROUNDING MEMORY: PAST MODEL ANSWERS ---\nFor consistency, maintain a similar analytical depth and style to these past model answers:\n"
         for idx, ans in enumerate(past_answers):
             memory_context += f"Model Answer {idx+1} (Preview):\n{ans['answer_text'][:500]}...\n"
+            
+    # Personal Notes RAG Injection
+    rag_context = ""
+    relevant_notes = search_personal_notes(user_question, subject, api_key=key, top_k=3)
+    if relevant_notes:
+        rag_context = "\n\n--- YOUR PERSONAL NOTES (RAG) ---\nIncorporate these highly relevant facts and arguments from your personal notes into the model answer:\n"
+        for note in relevant_notes:
+            rag_context += f"- {note}\n"
 
-    system_prompt = f"{subject_prompt}\n\n{vault_injection}{memory_context}"
+    system_prompt = f"{subject_prompt}\n\n{vault_injection}{memory_context}{rag_context}"
 
     prompt = f"""
     TARGET QUESTION / DOUBT: {user_question}
