@@ -30,7 +30,7 @@ def search_personal_notes(query_text, subject, api_key=None, top_k=3):
         
         # 1. Embed the query
         response = client.models.embed_content(
-            model="text-embedding-004",
+            model="gemini-embedding-001",
             contents=query_text
         )
         query_vec = np.array(response.embeddings[0].values, dtype=np.float32)

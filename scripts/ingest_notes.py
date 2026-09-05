@@ -66,18 +66,19 @@ def extract_text_from_pdf(filepath):
         print(f"Error reading {filepath}: {e}")
     return text
 
-def get_embedding(text):
+def get_embeddings_batch(chunks):
     if not client:
-        return np.zeros(768).tolist() # Fallback for testing without API key
+        return [np.zeros(3072).tolist() for _ in chunks]
     try:
         response = client.models.embed_content(
-            model="text-embedding-004",
-            contents=text
+            model="gemini-embedding-001",
+            contents=chunks
         )
-        return response.embeddings[0].values
+        # response.embeddings is a list of embeddings matching the order of contents
+        return [e.values for e in response.embeddings]
     except Exception as e:
-        print(f"Embedding error: {e}")
-        return np.zeros(768).tolist()
+        print(f"Batch embedding error: {e}")
+        return [np.zeros(3072).tolist() for _ in chunks]
 
 def ingest_all():
     if not os.path.exists(NOTES_DIR):
@@ -109,19 +110,25 @@ def ingest_all():
                 continue
                 
             chunks = chunk_text(text)
-            print(f"  -> Extracted {len(chunks)} chunks. Generating embeddings...")
+            print(f"  -> Extracted {len(chunks)} chunks. Generating embeddings in batches...")
             
-            for chunk in chunks:
-                emb = get_embedding(chunk)
-                emb_bytes = np.array(emb, dtype=np.float32).tobytes()
+            # Batch process in groups of 100
+            batch_size = 100
+            for i in range(0, len(chunks), batch_size):
+                batch_chunks = chunks[i:i + batch_size]
+                embeddings = get_embeddings_batch(batch_chunks)
                 
-                c.execute(
-                    "INSERT INTO notes_chunks (subject, filename, chunk_text, embedding) VALUES (?, ?, ?, ?)",
-                    (ui_subject, filename, chunk, emb_bytes)
-                )
-                total_chunks += 1
+                for chunk, emb in zip(batch_chunks, embeddings):
+                    emb_bytes = np.array(emb, dtype=np.float32).tobytes()
+                    c.execute(
+                        "INSERT INTO notes_chunks (subject, filename, chunk_text, embedding) VALUES (?, ?, ?, ?)",
+                        (ui_subject, filename, chunk, emb_bytes)
+                    )
+                    total_chunks += 1
                 
-    conn.commit()
+                print(f"     ... embedded {min(i + batch_size, len(chunks))}/{len(chunks)} chunks")
+                conn.commit() # commit after every batch
+                
     conn.close()
     print(f"\n✅ Ingestion complete! Saved {total_chunks} chunks to {DB_PATH}")
     print("Don't forget to run `git add .`, `git commit`, and `git push` so Streamlit Cloud gets the new database!")
